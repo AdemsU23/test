@@ -1,0 +1,30 @@
+MIRACLE TEAMS — SITE WEB
+========================
+
+OUVRIR LE SITE
+  Double-clique sur index.html.
+  Une connexion internet est nécessaire (polices, photos et animations).
+
+CONTENU DU DOSSIER
+  index.html       le contenu de la page
+  css/style.css    le design (couleurs, tailles, mise en page)
+  js/main.js       les animations et les formulaires
+  assets/img/      logo, icône d'onglet, image de partage
+
+METTRE LE SITE EN LIGNE
+  Envoie tout le dossier chez un hébergeur de sites statiques
+  (Netlify, GitHub Pages, Vercel, OVH…). Rien d'autre à installer.
+
+À COMPLÉTER
+  - Réseaux sociaux : dans index.html, remplace les liens "#"
+    (Instagram, YouTube, TikTok, Facebook) par tes vraies adresses.
+  - Image de partage : une fois le site en ligne, mets l'adresse complète
+    dans la balise og:image (ex. https://ton-site.com/assets/img/og-image.jpg).
+  - Films : quand un film est prêt, mets l'identifiant de la vidéo YouTube
+    dans data-youtube="..." sur sa carte ; elle ouvrira alors le lecteur.
+  - Photos : ce sont des photos libres de droits (Unsplash) ;
+    tu peux les remplacer par celles de ton équipe.
+
+FORMULAIRES
+  Les témoignages et les questions du podcast arrivent sur ton compte
+  Formspree, comme avant.

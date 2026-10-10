@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miracle Teams — Témoignages en courts métrages</title>
+  <meta name="description" content="Miracle Teams transforme des témoignages réels de foi et de vie en courts métrages cinématographiques. Partage ton histoire, anonymement.">
+  <meta name="theme-color" content="#04060b">
+
+  <!-- Partage sur les réseaux (WhatsApp, Facebook, Instagram…).
+       Une fois le site en ligne, remplace les chemins relatifs par l'adresse complète
+       (ex. https://ton-domaine.com/og-image.jpg). -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Miracle Teams">
+  <meta property="og:title" content="Miracle Teams — Ton témoignage, notre prochain film">
+  <meta property="og:description" content="Des témoignages réels de foi et de vie transformés en courts métrages cinématographiques.">
+  <meta property="og:image" content="og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    // Active les styles "avec JavaScript" et cache l'intro si le script principal ne se charge pas.
+    document.documentElement.className = 'js';
+    setTimeout(function () { if (!window.__mt) document.documentElement.classList.add('loader-fail'); }, 6000);
+  </script>
+
+  <!-- Animations : GSAP (+ ScrollTrigger, SplitText) et défilement fluide Lenis -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script defer src="main.js"></script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+<!-- ═════════════ INTRO (compte à rebours façon pellicule) ═════════════ -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__cols">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="loader__stage">
+    <div class="leader">
+      <svg class="leader__svg" viewBox="0 0 200 200">
+        <circle class="leader__pie" cx="100" cy="100" r="45" />
+        <circle class="leader__ring" cx="100" cy="100" r="92" />
+        <circle class="leader__ring leader__ring--inner" cx="100" cy="100" r="78" />
+        <line x1="0" y1="100" x2="200" y2="100" />
+        <line x1="100" y1="0" x2="100" y2="200" />
+      </svg>
+      <span class="leader__num">3</span>
+    </div>
+    <div class="loader__brand">
+      <img class="loader__logo" src="logo-shield.png" alt="" width="406" height="535">
+      <p class="loader__word"><span>M</span><span>I</span><span>R</span><span>A</span><span>C</span><span>L</span><span>E</span><span>&nbsp;</span><span>T</span><span>E</span><span>A</span><span>M</span><span>S</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="grain" aria-hidden="true"></div>
+
+<div class="cursor is-hidden" aria-hidden="true">
+  <div class="cursor__dot"></div>
+  <div class="cursor__ring"><span class="cursor__label"></span></div>
+</div>
+
+<!-- ═════════════ NAVIGATION ═════════════ -->
+<header class="nav">
+  <a class="nav__brand" href="#accueil" aria-label="Miracle Teams — retour à l'accueil">
+    <img src="logo-shield.png" alt="" width="406" height="535">
+    <span>Miracle<b>Teams</b></span>
+  </a>
+  <nav class="nav__links" aria-label="Navigation principale">
+    <a href="#accueil">Accueil</a>
+    <a href="#vision">Vision</a>
+    <a href="#films">Films</a>
+    <a href="#temoigner">Témoigner</a>
+    <a href="#podcast">Podcast</a>
+    <span class="nav__indicator" aria-hidden="true"></span>
+  </nav>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<!-- Menu plein écran -->
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true" inert>
+  <nav class="menu__links" aria-label="Menu">
+    <a href="#accueil" style="--i:0"><small>01</small><span>Accueil</span></a>
+    <a href="#vision" style="--i:1"><small>02</small><span>Vision</span></a>
+    <a href="#films" style="--i:2"><small>03</small><span>Films</span></a>
+    <a href="#temoigner" style="--i:3"><small>04</small><span>Témoigner</span></a>
+    <a href="#podcast" style="--i:4"><small>05</small><span>Podcast</span></a>
+  </nav>
+  <div class="menu__aside">
+    <p class="menu__text">Ton témoignage devient le point de contact pour sauver quelqu'un d'autre.</p>
+    <div class="social">
+      <!-- Remplace les "#" par tes vrais liens -->
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle class="fill" cx="17.4" cy="6.6" r="1.1"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="fill" d="M10.4 9.2v5.6l4.8-2.8z"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3.5v10.8a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.5 2.7 2.3 4.4 5 4.7"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path class="fill" d="M14.4 21v-7.6h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4a21 21 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.1H8.6v3h2.6V21z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<main id="contenu" tabindex="-1">
+
+  <!-- ═════════════ HERO / VITRINE ═════════════ -->
+  <section class="hero" id="accueil" aria-roledescription="carrousel" aria-label="Présentation de Miracle Teams">
+    <div class="hero__media">
+      <div class="hero__slide is-active" data-ghost="0.70 0.40 1.5"
+           data-ghost-src="https://images.unsplash.com/photo-1496559249665-c7e2874707ea?auto=format&fit=crop&w=480&q=50&blur=30">
+        <img src="https://images.unsplash.com/photo-1496559249665-c7e2874707ea?auto=format&fit=crop&w=1920&q=75"
+             srcset="https://images.unsplash.com/photo-1496559249665-c7e2874707ea?auto=format&fit=crop&w=1200&q=75 1200w,
+                     https://images.unsplash.com/photo-1496559249665-c7e2874707ea?auto=format&fit=crop&w=1920&q=75 1920w,
+                     https://images.unsplash.com/photo-1496559249665-c7e2874707ea?auto=format&fit=crop&w=2600&q=72 2600w"
+             sizes="100vw" style="--pos: 70% 40%; --pos-m: 80% 50%"
+             alt="Jeune cinéaste noir filmant avec une caméra de cinéma" fetchpriority="high" decoding="async">
+      </div>
+      <div class="hero__slide" data-ghost="0.58 0.42 1.5"
+           data-ghost-src="https://images.unsplash.com/photo-1603126004012-6b6715b9ed91?auto=format&fit=crop&w=480&q=50&blur=30&flip=h">
+        <img src="https://images.unsplash.com/photo-1603126004012-6b6715b9ed91?auto=format&fit=crop&w=1920&q=75&flip=h"
+             srcset="https://images.unsplash.com/photo-1603126004012-6b6715b9ed91?auto=format&fit=crop&w=1200&q=75&flip=h 1200w,
+                     https://images.unsplash.com/photo-1603126004012-6b6715b9ed91?auto=format&fit=crop&w=1920&q=75&flip=h 1920w,
+                     https://images.unsplash.com/photo-1603126004012-6b6715b9ed91?auto=format&fit=crop&w=2600&q=72&flip=h 2600w"
+             sizes="100vw" style="--pos: 62% 45%; --pos-m: 64% 50%"
+             alt="Silhouette d'un cadreur en contre-jour bleu sur un plateau de tournage" decoding="async">
+      </div>
+      <div class="hero__slide" data-ghost="0.62 0.50 1.5"
+           data-ghost-src="https://images.unsplash.com/photo-1618863952245-6b44333cca97?auto=format&fit=crop&w=480&q=50&blur=30&flip=h">
+        <img src="https://images.unsplash.com/photo-1618863952245-6b44333cca97?auto=format&fit=crop&w=1920&q=75&flip=h"
+             srcset="https://images.unsplash.com/photo-1618863952245-6b44333cca97?auto=format&fit=crop&w=1200&q=75&flip=h 1200w,
+                     https://images.unsplash.com/photo-1618863952245-6b44333cca97?auto=format&fit=crop&w=1920&q=75&flip=h 1920w,
+                     https://images.unsplash.com/photo-1618863952245-6b44333cca97?auto=format&fit=crop&w=2600&q=72&flip=h 2600w"
+             sizes="100vw" style="--pos: 68% 35%; --pos-m: 78% 50%"
+             alt="Jeune vidéaste portant une croix autour du cou, sa caméra de cinéma en main" decoding="async">
+      </div>
+    </div>
+    <div class="hero__tint" aria-hidden="true"></div>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__floor" aria-hidden="true"></div>
+    <div class="hero__glass" aria-hidden="true"></div>
+
+    <svg class="hero__swoosh" viewBox="0 0 900 700" preserveAspectRatio="xMaxYMin meet" aria-hidden="true">
+      <defs>
+        <linearGradient id="sw-fill" x1="0.2" y1="0.9" x2="0.95" y2="0.05">
+          <stop offset="0" stop-color="#eef3fd" stop-opacity=".9" />
+          <stop offset=".12" stop-color="#b4c6e8" stop-opacity=".55" />
+          <stop offset=".42" stop-color="#2f4470" stop-opacity=".3" />
+          <stop offset="1" stop-color="#05080f" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="sw-rim" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0" />
+          <stop offset=".5" stop-color="#fff" stop-opacity=".95" />
+          <stop offset="1" stop-color="#fff" stop-opacity=".15" />
+        </linearGradient>
+        <filter id="sw-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9" /></filter>
+      </defs>
+      <path class="sw-sheet sw-sheet--back" d="M900 0H560C700 70 820 190 900 330Z" fill="url(#sw-fill)" />
+      <path class="sw-sheet" d="M900 0H360C560 50 760 210 900 470Z" fill="url(#sw-fill)" />
+      <path class="sw-glow" d="M360 0C560 50 760 210 900 470" stroke="url(#sw-rim)" stroke-width="12" fill="none" filter="url(#sw-blur)" />
+      <path class="sw-rim" d="M360 0C560 50 760 210 900 470" stroke="url(#sw-rim)" stroke-width="1.6" fill="none" />
+    </svg>
+
+    <div class="hero__content">
+      <div class="hero__copies">
+        <div class="hero__copy is-active">
+          <p class="hero__eyebrow">Foi · Cinéma · Témoignage</p>
+          <h1 class="hero__title">Ton témoignage,<br>notre prochain film.</h1>
+          <p class="hero__text">Ton témoignage devient le point de contact pour sauver quelqu'un d'autre. Nous transformons des histoires vraies de foi et de vie en courts métrages.</p>
+        </div>
+        <div class="hero__copy" aria-hidden="true">
+          <p class="hero__eyebrow">Notre vision</p>
+          <p class="hero__title">L'Évangile à travers<br>le 7ème art.</p>
+          <p class="hero__text">Le cinéma porte les témoignages au-delà des mots, pour rejoindre ceux qui ne franchissent pas encore les portes d'une église.</p>
+        </div>
+        <div class="hero__copy" aria-hidden="true">
+          <p class="hero__eyebrow">Miracle Teams</p>
+          <p class="hero__title">Une jeunesse<br>au service du Roi.</p>
+          <p class="hero__text">Parce que la grâce de Dieu mérite la plus belle des scènes : des productions professionnelles, ancrées dans l'Évangile.</p>
+        </div>
+      </div>
+      <div class="hero__actions">
+        <a href="#temoigner" class="btn btn--glass" data-magnetic>
+          <span class="btn__label" data-text="Partager mon témoignage"><span>Partager mon témoignage</span></span>
+          <svg class="btn__arrow" viewBox="0 0 34 12" aria-hidden="true"><path d="M0 6h32M27 1l5 5-5 5" /></svg>
+        </a>
+        <a href="#films" class="btn btn--link">
+          Voir les films
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" /></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="hero__scroll" aria-hidden="true"><span>Défiler pour découvrir</span><i></i></p>
+
+    <div class="hero__bottom">
+      <div class="hero__social">
+        <div class="social">
+          <!-- Remplace les "#" par tes vrais liens -->
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle class="fill" cx="17.4" cy="6.6" r="1.1"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="fill" d="M10.4 9.2v5.6l4.8-2.8z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M14 3.5v10.8a3.6 3.6 0 1 1-3.6-3.6"/><path d="M14 3.5c.5 2.7 2.3 4.4 5 4.7"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path class="fill" d="M14.4 21v-7.6h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4a21 21 0 0 0-2.4-.1c-2.4 0-4 1.4-4 4.1v2.1H8.6v3h2.6V21z"/></svg></a>
+        </div>
+      </div>
+      <div class="slider">
+        <span class="slider__count" aria-hidden="true"><b>01</b> / 03</span>
+        <button class="slider__arrow" type="button" data-dir="-1" aria-label="Diapositive précédente">
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 2L4 6l4 4" /></svg>
+        </button>
+        <button class="slider__arrow" type="button" data-dir="1" aria-label="Diapositive suivante">
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" /></svg>
+        </button>
+        <div class="slider__dots">
+          <button type="button" class="is-active" aria-label="Diapositive 1" aria-current="true"><span></span></button>
+          <button type="button" aria-label="Diapositive 2"><span></span></button>
+          <button type="button" aria-label="Diapositive 3"><span></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ BANDEAU DÉFILANT ═════════════ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__inner">
+      <div class="marquee__group">
+        <span>Foi</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Cinéma</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span>Témoignage</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Grâce</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span>Évangile</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Impact</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+      </div>
+      <div class="marquee__group">
+        <span>Foi</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Cinéma</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span>Témoignage</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Grâce</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span>Évangile</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <span class="outline">Impact</span><svg viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═════════════ VISION ═════════════ -->
+  <section class="section vision" id="vision">
+    <div class="container">
+      <h2 class="label"><i>01</i> Notre vision</h2>
+      <p class="statement">Miracle Teams est né d'une conviction : les témoignages de foi ont le pouvoir de <span class="hl">transformer les cœurs</span>. Et le cinéma a le pouvoir de les porter <span class="hl">au-delà des mots</span>.</p>
+
+      <div class="vision__grid">
+        <div class="media" data-clip>
+          <img src="https://images.unsplash.com/photo-1695192681811-969dc36a801e?auto=format&fit=crop&w=1200&q=75"
+               alt="Un acteur face à une caméra sur un plateau plongé dans une lumière bleue" loading="lazy" decoding="async" data-parallax="0.08">
+          <span class="media__tag"><i></i>Inspiré d'histoires vraies</span>
+        </div>
+        <div class="vision__text">
+          <h3 class="h3" data-split>Des histoires vraies,<br>une narration de cinéma.</h3>
+          <p data-reveal>Chaque court métrage que nous produisons est inspiré d'une histoire vraie — partagée anonymement — et réinventée à travers une narration cinématographique puissante pour rejoindre ceux qui ne franchissent pas encore les portes d'une église.</p>
+          <p class="vision__punch" data-reveal>Parce que la grâce de Dieu mérite la plus belle des scènes.</p>
+          <a href="#temoigner" class="btn btn--link" data-reveal>
+            Partager mon histoire
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" /></svg>
+          </a>
+        </div>
+      </div>
+
+      <ul class="values" data-stagger>
+        <li class="value">
+          <span class="value__num">01</span>
+          <span class="value__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="7" width="13" height="10" rx="2"/><path d="M15.5 10.5l6-3v9l-6-3"/><circle cx="6.5" cy="4.5" r="2"/><circle cx="11.5" cy="4.5" r="2"/></svg></span>
+          <h3>Cinéma</h3>
+          <p>Des productions professionnelles, esthétiquement engagées.</p>
+        </li>
+        <li class="value">
+          <span class="value__num">02</span>
+          <span class="value__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg></span>
+          <h3>Anonymat</h3>
+          <p>Ton nom, ton visage, ton identité : jamais divulgués.</p>
+        </li>
+        <li class="value">
+          <span class="value__num">03</span>
+          <span class="value__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5v19M6.5 8h11"/></svg></span>
+          <h3>Foi</h3>
+          <p>Ancrés dans l'Évangile, ouverts à toutes les histoires.</p>
+        </li>
+        <li class="value">
+          <span class="value__num">04</span>
+          <span class="value__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="9.5"/></svg></span>
+          <h3>Impact</h3>
+          <p>Rejoindre ceux que les mots seuls n'atteignent pas.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═════════════ CITATION ═════════════ -->
+  <section class="quote" aria-label="Citation biblique">
+    <div class="quote__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1579036095242-fe07594274ca?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="quote__beam" aria-hidden="true"></div>
+    <figure class="quote__inner">
+      <svg class="quote__mark" viewBox="0 0 64 48" aria-hidden="true"><path d="M0 48V28C0 12 8 2 26 0l2 7C18 10 13 16 13 24h13v24zm36 0V28C36 12 44 2 62 0l2 7c-10 3-15 9-15 17h13v24z"/></svg>
+      <blockquote><p>Que votre lumière brille devant les hommes, afin qu'ils voient vos bonnes œuvres.</p></blockquote>
+      <figcaption>— Matthieu 5:16</figcaption>
+    </figure>
+  </section>
+
+  <!-- ═════════════ PROCESSUS (défilement horizontal) ═════════════ -->
+  <section class="process" id="processus" aria-labelledby="process-title">
+    <div class="process__head">
+      <div>
+        <p class="label"><i>02</i> Le processus</p>
+        <h2 class="h2" id="process-title" data-split>Du témoignage <em>à l'écran</em></h2>
+      </div>
+      <p class="process__intro" data-reveal>Quatre étapes, un seul objectif : que ton histoire touche quelqu'un d'autre.</p>
+    </div>
+    <div class="process__viewport">
+      <ol class="process__track">
+        <li class="step">
+          <span class="step__num">01</span>
+          <div>
+            <h3>Tu partages</h3>
+            <p>Tu racontes ton histoire librement, à ton rythme. Ton identité n'est jamais divulguée.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">02</span>
+          <div>
+            <h3>Tu choisis</h3>
+            <p>Tu décides si ton témoignage peut devenir un film : librement, après en avoir parlé avec nous, ou pas du tout.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">03</span>
+          <div>
+            <h3>Nous écrivons &amp; tournons</h3>
+            <p>Ton histoire est réinventée en fiction cinématographique : scénario, tournage, montage.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">04</span>
+          <div>
+            <h3>Le film touche des cœurs</h3>
+            <p>Le court métrage est diffusé pour rejoindre ceux que les mots seuls n'atteignent pas.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+    <div class="process__progress" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- ═════════════ FILMS ═════════════ -->
+  <section class="section films" id="films">
+    <div class="container">
+      <div class="films__head">
+        <div>
+          <p class="label"><i>03</i> Nos productions</p>
+          <h2 class="h2" data-split>Les courts <em>métrages</em></h2>
+        </div>
+        <p class="films__intro" data-reveal>Nos premiers films sont en préparation. Voici ce qui arrive bientôt à l'écran.</p>
+      </div>
+
+      <!-- Quand un film est prêt, mets l'identifiant de la vidéo YouTube dans data-youtube
+           (ex. data-youtube="dQw4w9WgXcQ") : la carte devient cliquable et ouvre le lecteur. -->
+      <div class="films__grid">
+        <article class="film" data-youtube="">
+          <div class="film__img"><img src="https://images.unsplash.com/photo-1519238425857-d6922ed3d613?auto=format&fit=crop&w=1100&q=72" alt="" loading="lazy" decoding="async" style="--pos: 38% 50%"></div>
+          <div class="film__glare" aria-hidden="true"></div>
+          <span class="film__badge"><i></i>Bientôt</span>
+          <span class="film__index" aria-hidden="true">01</span>
+          <div class="film__info">
+            <p class="film__cat">Témoignage · Foi</p>
+            <h3 class="film__title">Le chemin du retour</h3>
+          </div>
+        </article>
+        <article class="film" data-youtube="">
+          <div class="film__img"><img src="https://images.unsplash.com/photo-1789009839397-2f2d3b02173a?auto=format&fit=crop&w=1100&q=72" alt="" loading="lazy" decoding="async" style="--pos: 50% 50%"></div>
+          <div class="film__glare" aria-hidden="true"></div>
+          <span class="film__badge"><i></i>Bientôt</span>
+          <span class="film__index" aria-hidden="true">02</span>
+          <div class="film__info">
+            <p class="film__cat">Témoignage · Guérison</p>
+            <h3 class="film__title">Ce que le médecin ne savait pas</h3>
+          </div>
+        </article>
+        <article class="film" data-youtube="">
+          <div class="film__img"><img src="https://images.unsplash.com/photo-1517437478710-db9151f07d20?auto=format&fit=crop&w=900&q=72" alt="" loading="lazy" decoding="async" style="--pos: 50% 60%"></div>
+          <div class="film__glare" aria-hidden="true"></div>
+          <span class="film__badge"><i></i>Bientôt</span>
+          <span class="film__index" aria-hidden="true">03</span>
+          <div class="film__info">
+            <p class="film__cat">Témoignage · Espoir</p>
+            <h3 class="film__title">La nuit avant l'aurore</h3>
+          </div>
+        </article>
+      </div>
+
+      <div class="films__note" data-reveal>
+        <p>De nouveaux courts métrages arrivent bientôt — <strong>partage ton témoignage pour en faire partie.</strong></p>
+        <a href="#temoigner" class="btn btn--link">
+          Je témoigne
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2l4 4-4 4" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ FORMULAIRE TÉMOIGNAGE ═════════════ -->
+  <section class="section testify" id="temoigner">
+    <div class="container testify__grid">
+      <div class="testify__intro">
+        <p class="label"><i>04</i> Partage avec nous</p>
+        <h2 class="h2" data-split>Ton <em>témoignage</em></h2>
+        <p class="lead" data-reveal>Raconte ton histoire, à ton rythme. Elle pourrait un jour toucher des milliers de cœurs à travers le cinéma.</p>
+        <div class="notice" data-reveal>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg>
+          <p><strong>100 % anonyme.</strong> Ton prénom, ton identité et tes informations personnelles ne seront jamais divulgués. Seul le contenu de ton histoire peut être transformé en fiction cinématographique, avec ton accord.</p>
+        </div>
+      </div>
+
+      <div class="form-card" data-reveal>
+        <form class="form" id="form-temoignage" action="https://formspree.io/f/mlgzojqv" method="POST" data-form data-success="success-temoignage">
+          <input type="hidden" name="_subject" value="Nouveau témoignage - Miracle Teams">
+          <input type="hidden" name="formulaire" value="temoignage">
+
+          <ol class="stepper" aria-hidden="true">
+            <li class="is-current"><span>01</span><em>Catégorie</em></li>
+            <li><span>02</span><em>Ton histoire</em></li>
+            <li><span>03</span><em>Accord</em></li>
+          </ol>
+          <p class="sr-only" aria-live="polite" data-step-status></p>
+
+          <fieldset class="step-panel is-current">
+            <legend class="field__label">Quel type de témoignage&nbsp;?</legend>
+            <div class="tiles">
+              <label class="tile"><input type="radio" name="type_temoignage" value="guerison" required><span class="tile__dot"></span><span>Guérison miraculeuse</span></label>
+              <label class="tile"><input type="radio" name="type_temoignage" value="conversion"><span class="tile__dot"></span><span>Conversion / Rencontre avec Dieu</span></label>
+              <label class="tile"><input type="radio" name="type_temoignage" value="delivrance"><span class="tile__dot"></span><span>Délivrance</span></label>
+              <label class="tile"><input type="radio" name="type_temoignage" value="grace"><span class="tile__dot"></span><span>Grâce dans l'épreuve</span></label>
+              <label class="tile"><input type="radio" name="type_temoignage" value="vie"><span class="tile__dot"></span><span>Témoignage de vie (sans religion)</span></label>
+              <label class="tile"><input type="radio" name="type_temoignage" value="autre"><span class="tile__dot"></span><span>Autre</span></label>
+            </div>
+          </fieldset>
+
+          <div class="step-panel">
+            <div class="field">
+              <label class="field__label" for="temoignage-text">Ton témoignage <span aria-hidden="true">*</span></label>
+              <textarea id="temoignage-text" name="temoignage" class="textarea" maxlength="3000" required data-lenis-prevent data-counter="count-temoignage"
+                placeholder="Raconte ton histoire librement. Prends le temps qu'il faut. Tout ce que tu partages ici reste confidentiel."></textarea>
+              <div class="counter"><div class="counter__bar"><span></span></div><p><span id="count-temoignage">0</span> / 3000</p></div>
+            </div>
+          </div>
+
+          <div class="step-panel">
+            <fieldset class="field">
+              <legend class="field__label">Ton témoignage peut-il devenir un court métrage&nbsp;?</legend>
+              <div class="tiles tiles--stack">
+                <label class="tile"><input type="radio" name="accord" value="oui_total" required><span class="tile__dot"></span><span><strong>Oui, librement</strong><small>Sans me contacter</small></span></label>
+                <label class="tile"><input type="radio" name="accord" value="oui_contact"><span class="tile__dot"></span><span><strong>Oui, mais contactez-moi d'abord</strong><small>On en parle ensemble avant toute adaptation</small></span></label>
+                <label class="tile"><input type="radio" name="accord" value="non"><span class="tile__dot"></span><span><strong>Non, je veux juste partager</strong><small>Ton histoire reste entre nous</small></span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label class="field__label" for="email-contact">Puis-je te contacter pour en savoir plus&nbsp;? <small data-email-optional>(optionnel)</small></label>
+              <input id="email-contact" type="email" name="email_contact" class="input" placeholder="ton.email@exemple.com" autocomplete="email">
+              <p class="field__hint" data-email-hint>Facultatif. Jamais partagé ni publié.</p>
+            </div>
+          </div>
+
+          <div class="form-nav">
+            <button type="button" class="btn btn--ghost form-prev" hidden>
+              <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M8 2L4 6l4 4" /></svg>Retour
+            </button>
+            <button type="button" class="btn btn--primary form-next" hidden>
+              <span class="btn__label" data-text="Continuer"><span>Continuer</span></span>
+              <svg class="btn__arrow" viewBox="0 0 34 12" aria-hidden="true"><path d="M0 6h32M27 1l5 5-5 5" /></svg>
+            </button>
+            <button type="submit" class="btn btn--primary form-submit">
+              <span class="btn__label" data-text="Envoyer mon témoignage"><span>Envoyer mon témoignage</span></span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="form-error" role="alert"></p>
+        </form>
+
+        <div class="success" id="success-temoignage" tabindex="-1" hidden>
+          <svg class="success__check" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" /><path d="M20 33l8 8 16-17" /></svg>
+          <h3>Merci pour ton témoignage</h3>
+          <p>Ton histoire a été reçue avec soin. Elle pourrait un jour toucher des milliers de cœurs à travers le cinéma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ PODCAST ═════════════ -->
+  <section class="section podcast" id="podcast">
+    <div class="container podcast__grid">
+      <div class="podcast__intro">
+        <p class="label"><i>05</i> Pose ta question</p>
+        <h2 class="h2" data-split>Le <em>podcast</em></h2>
+        <p class="lead" data-reveal>Nous préparons un podcast qui explore la foi, la vie et le cinéma chrétien. Tu as une question, un sujet que tu voudrais qu'on aborde&nbsp;? Envoie-la ici — anonymement ou non.</p>
+        <div class="podcast__player" data-reveal>
+          <span class="podcast__mic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8.5" y="2.5" width="7" height="12" rx="3.5"/><path d="M5 11.5a7 7 0 0 0 14 0M12 18.5v3"/></svg></span>
+          <div class="wave" aria-hidden="true"></div>
+          <span class="pill"><i></i>Bientôt disponible</span>
+        </div>
+      </div>
+
+      <div class="form-card" data-reveal>
+        <form class="form" id="form-podcast" action="https://formspree.io/f/mvzlvapg" method="POST" data-form data-success="success-podcast">
+          <input type="hidden" name="_subject" value="Question Podcast - Miracle Teams">
+          <input type="hidden" name="formulaire" value="podcast">
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field__label" for="podcast-prenom">Prénom <small>(optionnel)</small></label>
+              <input id="podcast-prenom" type="text" name="prenom" class="input" placeholder="Ou reste anonyme" autocomplete="given-name">
+            </div>
+            <div class="field">
+              <label class="field__label" for="podcast-theme">Thème</label>
+              <select id="podcast-theme" name="theme" class="select">
+                <option value="foi">Foi &amp; Vie chrétienne</option>
+                <option value="cinema">Cinéma &amp; Évangélisation</option>
+                <option value="temoignage">Témoignages</option>
+                <option value="vie">Questions de vie</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="podcast-text">Ta question <span aria-hidden="true">*</span></label>
+            <textarea id="podcast-text" name="question" class="textarea textarea--short" maxlength="1000" required data-lenis-prevent data-counter="count-podcast"
+              placeholder="Quelle question aimerais-tu qu'on aborde dans le podcast ?"></textarea>
+            <div class="counter"><div class="counter__bar"><span></span></div><p><span id="count-podcast">0</span> / 1000</p></div>
+          </div>
+
+          <div class="form-nav">
+            <button type="submit" class="btn btn--primary btn--block form-submit">
+              <span class="btn__label" data-text="Envoyer ma question"><span>Envoyer ma question</span></span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+          <p class="form-error" role="alert"></p>
+        </form>
+
+        <div class="success" id="success-podcast" tabindex="-1" hidden>
+          <svg class="success__check" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" /><path d="M20 33l8 8 16-17" /></svg>
+          <h3>Question reçue&nbsp;!</h3>
+          <p>Merci&nbsp;! Ta question a bien été envoyée. On essaiera de l'aborder dans un prochain épisode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ APPEL À L'ACTION ═════════════ -->
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="cta__bg" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=2000&q=70" alt="" loading="lazy" decoding="async" data-parallax="0.09">
+    </div>
+    <div class="cta__inner">
+      <h2 class="cta__title" id="cta-title" data-split>Ton histoire mérite<br>d'être vue.</h2>
+      <p data-reveal>Elle pourrait être le point de contact pour sauver quelqu'un d'autre.</p>
+      <a href="#temoigner" class="cta__btn" data-magnetic="0.45" data-reveal>
+        <span>Témoigner</span>
+        <svg viewBox="0 0 34 12" aria-hidden="true"><path d="M0 6h32M27 1l5 5-5 5" /></svg>
+      </a>
+    </div>
+  </section>
+</main>
+
+<!-- ═════════════ PIED DE PAGE ═════════════ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <img src="logo-full.png" alt="Miracle Teams — Une jeunesse au service du Roi" width="1002" height="539" loading="lazy">
+      <p>Ton témoignage devient le point de contact pour sauver quelqu'un d'autre.</p>
+    </div>
+    <div class="footer__col">
+      <h3>Navigation</h3>
+      <a href="#accueil">Accueil</a>
+      <a href="#vision">Vision</a>
+      <a href="#films">Films</a>
+      <a href="#temoigner">Témoigner</a>
+      <a href="#podcast">Podcast</a>
+    </div>
+    <div class="footer__col">
+      <h3>Nous suivre</h3>
+      <!-- Remplace les "#" par tes vrais liens -->
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">TikTok</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+
+  <p class="footer__giant" aria-hidden="true">MIRACLE TEAMS</p>
+
+  <div class="footer__bottom">
+    <p>© <span data-year>2026</span> Miracle Teams — Tous droits réservés</p>
+    <p>Photos : <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+    <button class="to-top" type="button" data-scroll-top>
+      Haut de page
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 8l4-4 4 4" /></svg>
+    </button>
+  </div>
+</footer>
+
+<!-- Lecteur vidéo (s'ouvre quand un film a un identifiant YouTube) -->
+<dialog class="modal" aria-label="Lecteur vidéo">
+  <button class="modal__close" type="button" aria-label="Fermer la vidéo">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" /></svg>
+  </button>
+  <div class="modal__frame"></div>
+</dialog>
+
+</body>
+</html>
